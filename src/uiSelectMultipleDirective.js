@@ -252,11 +252,11 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
                 } else {
                   return curr;
                 }
-                
+
               } else {
                 // If nothing yet selected, select last item
-                return last;  
-              }              
+                return last;
+              }
               break;
             case KEY.DELETE:
               // Remove selected item and select next item
@@ -314,7 +314,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
             if ( items.length > 0 && tagItem ) {
               hasTag = true;
               items = items.slice(1,items.length);
-              stashArr = stashArr.slice(1,stashArr.length);
+              stashArr = stashArr.slice(0, stashArr.length - 1);
             }
             newItem = $select.tagging.fct($select.search);
             // verify the new tag doesn't match the value of a possible selection choice or an already selected item.
@@ -382,7 +382,7 @@ uis.directive('uiSelectMultiple', ['uiSelectMinErr','$timeout', function(uiSelec
           } else {
             items = [];
             if (newItem) items.push(newItem);
-            items = items.concat(stashArr);
+            items = stashArr.concat(items);
           }
           scope.$evalAsync( function () {
             $select.activeIndex = 0;
